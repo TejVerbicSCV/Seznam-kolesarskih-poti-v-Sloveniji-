@@ -1,0 +1,15 @@
+# Skrivnosti
+.env
+*.env
+
+# Java/Maven
+target/
+*.class
+.settings/
+.project
+.classpath
+
+# Ionic/Node
+node_modules/
+www/
+.sourcemaps/
