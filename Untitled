@@ -1,0 +1,5 @@
+DB_HOST=your-host.cockroachlabs.cloud
+DB_PORT=26257
+DB_NAME=defaultdb
+DB_USER=tvoje_uporabnisko_ime
+DB_PASSWORD=tvoje_zelo_varno_geslo
