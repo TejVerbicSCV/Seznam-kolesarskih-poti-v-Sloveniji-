@@ -16,7 +16,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/uporabniki")
+<<<<<<< Updated upstream
 @CrossOrigin(origins = "*")
+=======
+
+>>>>>>> Stashed changes
 public class UporabnikController {
 
     @Autowired
@@ -29,6 +33,7 @@ public class UporabnikController {
             // Check if user already exists
             Optional<Uporabnik> existing = uporabnikService.pridobiUporabnikaPoImenu(request.uporabnikoIme);
             if (existing.isPresent()) {
+<<<<<<< Updated upstream
                 return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body("Uporabničko ime že obstaja");
             }
@@ -40,6 +45,22 @@ public class UporabnikController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri registraciji: " + e.getMessage());
+=======
+                Map<String, String> error = new HashMap<>();
+                error.put("message", "Uporabniško ime že obstaja");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+            }
+
+            uporabnikService.registrirajUporabnika(request.uporabnikoIme, request.geslo);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Uporabnik uspešno registriran");
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri registraciji: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -50,8 +71,14 @@ public class UporabnikController {
             Object[] rezultat = uporabnikService.prijaviUporabnika(request.uporabnikoIme, request.geslo);
             
             if (rezultat == null) {
+<<<<<<< Updated upstream
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("Napačno uporabničko ime ali geslo");
+=======
+                Map<String, String> error = new HashMap<>();
+                error.put("message", "Napačno uporabničko ime ali geslo");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+>>>>>>> Stashed changes
             }
 
             // Format response with user data
@@ -64,8 +91,14 @@ public class UporabnikController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             e.printStackTrace();
+<<<<<<< Updated upstream
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri prijavi: " + e.getMessage());
+=======
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri prijavi: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -77,6 +110,7 @@ public class UporabnikController {
             // Verify user exists
             Optional<Uporabnik> user = uporabnikService.pridobiUporabnika(id);
             if (!user.isPresent()) {
+<<<<<<< Updated upstream
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Uporabnik ni najden");
             }
@@ -87,6 +121,22 @@ public class UporabnikController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri spremembi gesla: " + e.getMessage());
+=======
+                Map<String, String> error = new HashMap<>();
+                error.put("message", "Uporabnik ni najden");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+
+            uporabnikService.spremembaGesla(id, request.novoGeslo);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Geslo uspešno spremenjeno");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri spremembi gesla: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -98,6 +148,7 @@ public class UporabnikController {
             if (user.isPresent()) {
                 return ResponseEntity.ok(user.get());
             } else {
+<<<<<<< Updated upstream
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Uporabnik ni najden");
             }
@@ -105,6 +156,17 @@ public class UporabnikController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri pridobivanju uporabnika: " + e.getMessage());
+=======
+                Map<String, String> error = new HashMap<>();
+                error.put("message", "Uporabnik ni najden");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri pridobivanju uporabnika: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 }
