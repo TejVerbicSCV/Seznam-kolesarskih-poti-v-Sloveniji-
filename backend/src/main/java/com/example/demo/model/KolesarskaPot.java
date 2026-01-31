@@ -31,7 +31,10 @@ public class KolesarskaPot {
     @Column(name = "uporabnik_id", nullable = false)
     private Long uporabnikId;
     
+<<<<<<< Updated upstream
     @JsonIgnore
+=======
+>>>>>>> Stashed changes
     @ManyToMany
     @JoinTable(
         name = "kolesarske_poti_kraji",
@@ -40,7 +43,10 @@ public class KolesarskaPot {
     )
     private Set<Kraj> kraji;
     
+<<<<<<< Updated upstream
     @JsonIgnore
+=======
+>>>>>>> Stashed changes
     @ManyToMany
     @JoinTable(
         name = "kolesarske_poti_znamenitosti",

@@ -8,12 +8,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< Updated upstream
 import java.util.List;
+=======
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+>>>>>>> Stashed changes
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/poti")
+<<<<<<< Updated upstream
 @CrossOrigin(origins = "*")
+=======
+
+>>>>>>> Stashed changes
 public class PotController {
 
     @Autowired
@@ -32,11 +42,22 @@ public class PotController {
                 potDTO.uporabnikId,
                 potDTO.krajiIds.get(0)
             );
+<<<<<<< Updated upstream
             return ResponseEntity.status(HttpStatus.CREATED).body("Pot uspešno vnesena");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri vnosu poti: " + e.getMessage());
+=======
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Pot uspešno vnesena");
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri vnosu poti: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -45,11 +66,22 @@ public class PotController {
     public ResponseEntity<?> vnosPoti(@RequestBody PotDTO potDTO) {
         try {
             potService.vnosPoti(potDTO);
+<<<<<<< Updated upstream
             return ResponseEntity.status(HttpStatus.CREATED).body("Pot uspešno vnesena");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri vnosu poti: " + e.getMessage());
+=======
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Pot uspešno vnesena");
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri vnosu poti: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -57,6 +89,7 @@ public class PotController {
     @PutMapping("/{id}")
     public ResponseEntity<?> urediPot(@PathVariable Long id, @RequestBody PotDTO potDTO) {
         try {
+<<<<<<< Updated upstream
             potService.urediPot(
                 id,
                 potDTO.ime,
@@ -70,6 +103,18 @@ public class PotController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri urejanju poti: " + e.getMessage());
+=======
+            potService.urediPot(id, potDTO);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Pot uspešno urejena");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            System.err.println("Napaka pri urejanju poti (ID: " + id + "): " + e.getMessage());
+            e.printStackTrace();
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri urejanju poti: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -79,11 +124,22 @@ public class PotController {
                                              @RequestParam Long izvajalecId) {
         try {
             potService.izbrisiPotVarna(potId, izvajalecId);
+<<<<<<< Updated upstream
             return ResponseEntity.ok("Pot uspešno izbrisana");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri brisanju poti: " + e.getMessage());
+=======
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Pot uspešno izbrisana");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri brisanju poti: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -95,8 +151,14 @@ public class PotController {
             return ResponseEntity.ok(poti);
         } catch (Exception e) {
             e.printStackTrace();
+<<<<<<< Updated upstream
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri filtriranju: " + e.getMessage());
+=======
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri filtriranju: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -108,8 +170,14 @@ public class PotController {
             return ResponseEntity.ok(poti);
         } catch (Exception e) {
             e.printStackTrace();
+<<<<<<< Updated upstream
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri pridobivanju poti: " + e.getMessage());
+=======
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri pridobivanju poti: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 
@@ -121,6 +189,7 @@ public class PotController {
             if (pot.isPresent()) {
                 return ResponseEntity.ok(pot.get());
             } else {
+<<<<<<< Updated upstream
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Pot ni najdena");
             }
@@ -128,6 +197,17 @@ public class PotController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Napaka pri pridobivanju poti: " + e.getMessage());
+=======
+                Map<String, String> error = new HashMap<>();
+                error.put("message", "Pot ni najdena");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Napaka pri pridobivanju poti: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+>>>>>>> Stashed changes
         }
     }
 }
