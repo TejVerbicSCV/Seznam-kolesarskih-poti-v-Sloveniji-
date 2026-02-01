@@ -12,8 +12,8 @@ Moderna spletna aplikacija za upravljanje in raziskovanje kolesarskih poti po Sl
 
 ## 🛠️ Tehnologije
 
-- **Zaledni del**: Java 17, Spring Boot, Spring Data JPA, Hibernate.
-- **Čelni del**: Ionic Framework, HTML/JS, Vanilla CSS.
+- **Backend**: Java 17, Spring Boot, Spring Data JPA, Hibernate.
+- **Frontend**: Ionic Framework, HTML/JS, Vanilla CSS.
 - **Podatkovna baza**: PostgreSQL / CockroachDB.
 
 ---
@@ -27,20 +27,20 @@ Preverite, ali imate nameščen in zagnan PostgreSQL ali CockroachDB.
 2. Zaženite SQL skripto, ki se nahaja v mapi `backend`:
    - Zaženite `init_database.sql` za popolno postavitev tabel, funkcij in sprožilcev.
 
-### 2. Nastavitev zalednega dela (Spring Boot)
+### 2. Nastavitev backenda (Spring Boot)
 1. Pomaknite se v mapo `backend`.
 2. **Lokalna konfiguracija**:
-   - Kopirajte `src/main/resources/application-local.properties.example` v `src/main/resources/application-local.properties`.
+   - Kopirajte `src/main/resources/application-local.properties.example` v `src/main/resources/application-local.properties` ali pa ustvarite novo datoteko z imenom `application-local.properties`.
    - Posodobite `spring.datasource.url`, `username` in `password` s svojimi podatki.
 3. **Okoljske spremenljivke**:
-   - Kopirajte `.env.example` iz korenske mape v `.env`.
+   - Kopirajte `.env.example` iz korenske mape v `.env` ali pa ustvarite novo datoteko z imenom `.env`.
    - Vpišite podatke za dostop do baze.
 4. Zaženite aplikacijo:
    ```bash
    ./mvnw spring-boot:run
    ```
 
-### 3. Nastavitev čelnega dela (Ionic)
+### 3. Nastavitev frontenda (Ionic)
 1. Pomaknite se v mapo `ionic-frontend`.
 2. Namestite odvisnosti:
    ```bash
