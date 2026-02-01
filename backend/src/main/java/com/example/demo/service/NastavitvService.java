@@ -17,11 +17,6 @@ public class NastavitvService {
         return nastavitvRepository.probiNastavitev(key);
     }
 
-<<<<<<< Updated upstream
-    // Pridobi nastavitev entiteto po ključu
-    public Optional<Nastavitev> probiNastavitvEntiteto(String key) {
-        return Optional.ofNullable(nastavitvRepository.findByKey(key));
-=======
     // Pridobi vse nastavitve
     public java.util.List<Nastavitev> vseNastavitve() {
         return nastavitvRepository.pridobiVseNastavitve();
@@ -30,6 +25,5 @@ public class NastavitvService {
     // Pridobi nastavitev entiteto po ključu
     public Optional<Nastavitev> probiNastavitvEntiteto(String key) {
         return Optional.ofNullable(nastavitvRepository.findById(key).orElse(null));
->>>>>>> Stashed changes
     }
 }

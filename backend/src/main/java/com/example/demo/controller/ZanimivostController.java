@@ -7,22 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-<<<<<<< Updated upstream
-import java.util.List;
-=======
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
->>>>>>> Stashed changes
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/zanimivosti")
-<<<<<<< Updated upstream
-@CrossOrigin(origins = "*")
-=======
 
->>>>>>> Stashed changes
 public class ZanimivostController {
 
     @Autowired
@@ -36,14 +28,9 @@ public class ZanimivostController {
             return ResponseEntity.ok(zanimivosti);
         } catch (Exception e) {
             e.printStackTrace();
-<<<<<<< Updated upstream
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Napaka pri pridobivanju znamenitosti: " + e.getMessage());
-=======
             Map<String, String> error = new HashMap<>();
             error.put("message", "Napaka pri pridobivanju znamenitosti: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
->>>>>>> Stashed changes
         }
     }
 
@@ -55,15 +42,6 @@ public class ZanimivostController {
             if (zanimivost.isPresent()) {
                 return ResponseEntity.ok(zanimivost.get());
             } else {
-<<<<<<< Updated upstream
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Znamenitost ni najdena");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Napaka pri pridobivanju znamenitosti: " + e.getMessage());
-=======
                 Map<String, String> error = new HashMap<>();
                 error.put("message", "Znamenitost ni najdena");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
@@ -73,7 +51,6 @@ public class ZanimivostController {
             Map<String, String> error = new HashMap<>();
             error.put("message", "Napaka pri pridobivanju znamenitosti: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
->>>>>>> Stashed changes
         }
     }
 }

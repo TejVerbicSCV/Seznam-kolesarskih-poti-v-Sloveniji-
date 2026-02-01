@@ -23,12 +23,6 @@ public class PotService {
 
     // I) Kompleksen vnos - s krajem in znamenitostmi
     public void vnosPoti(PotDTO potDTO) {
-<<<<<<< Updated upstream
-        long[] krajiIds = potDTO.krajiIds != null ? 
-            potDTO.krajiIds.stream().mapToLong(Long::longValue).toArray() : null;
-        long[] znamenitostiIds = potDTO.znamenitostiIds != null ? 
-            potDTO.znamenitostiIds.stream().mapToLong(Long::longValue).toArray() : null;
-=======
         String krajiIdsStr = null;
         if (potDTO.krajiIds != null && !potDTO.krajiIds.isEmpty()) {
             krajiIdsStr = "{" + String.join(",", potDTO.krajiIds.stream().map(String::valueOf).toArray(String[]::new)) + "}";
@@ -38,7 +32,6 @@ public class PotService {
         if (potDTO.znamenitostiIds != null && !potDTO.znamenitostiIds.isEmpty()) {
             znamenitostiIdsStr = "{" + String.join(",", potDTO.znamenitostiIds.stream().map(String::valueOf).toArray(String[]::new)) + "}";
         }
->>>>>>> Stashed changes
 
         potRepository.vnosPoti(
             potDTO.ime,
@@ -47,22 +40,12 @@ public class PotService {
             potDTO.priporocenCas,
             potDTO.opis,
             potDTO.uporabnikId,
-<<<<<<< Updated upstream
-            krajiIds,
-            znamenitostiIds
-=======
             krajiIdsStr,
             znamenitostiIdsStr
->>>>>>> Stashed changes
         );
     }
 
     // B) Urejanje poti
-<<<<<<< Updated upstream
-    public void urediPot(Long id, String ime, Float dolzina, String tezavnost,
-                         String cas, String opis) {
-        potRepository.urediPot(id, ime, dolzina, tezavnost, cas, opis);
-=======
     public void urediPot(Long id, PotDTO potDTO) {
         String krajiIdsStr = null;
         if (potDTO.krajiIds != null && !potDTO.krajiIds.isEmpty()) {
@@ -87,7 +70,6 @@ public class PotService {
             krajiIdsStr,
             znamenitostiIdsStr
         );
->>>>>>> Stashed changes
     }
 
     // C) Varno brisanje poti (le ADMIN)
@@ -102,19 +84,11 @@ public class PotService {
 
     // Pridobi vse poti
     public List<KolesarskaPot> pridobiVsePoti() {
-<<<<<<< Updated upstream
-        return potRepository.findAll();
-=======
         return potRepository.pridobiVsePoti();
->>>>>>> Stashed changes
     }
 
     // Pridobi pot po ID
     public Optional<KolesarskaPot> pridobiPot(Long id) {
-<<<<<<< Updated upstream
-        return potRepository.findById(id);
-=======
         return Optional.ofNullable(potRepository.pridobiPotPoId(id));
->>>>>>> Stashed changes
     }
 }

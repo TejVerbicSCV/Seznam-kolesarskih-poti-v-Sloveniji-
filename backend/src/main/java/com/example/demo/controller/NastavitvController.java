@@ -8,18 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/nastavitve")
-<<<<<<< Updated upstream
-@CrossOrigin(origins = "*")
-=======
 
->>>>>>> Stashed changes
 public class NastavitvController {
 
     @Autowired
     private NastavitvService nastavitvService;
 
-<<<<<<< Updated upstream
-=======
     // Pridobi vse nastavitve
     @GetMapping
     public ResponseEntity<?> vseNastavitve() {
@@ -32,7 +26,6 @@ public class NastavitvController {
         }
     }
 
->>>>>>> Stashed changes
     // H) Pridobi nastavitev po ključu (get setting by key)
     @GetMapping("/{key}")
     public ResponseEntity<?> probiNastavitev(@PathVariable String key) {

@@ -18,19 +18,8 @@ public class ZanimivostService {
         return znamenitostRepository.probiVseZanimivosti();
     }
 
-<<<<<<< Updated upstream
-    // Pridobi vse
-    public List<Zanimivost> pridobiVse() {
-        return znamenitostRepository.findAll();
-    }
-
-    // Pridobi po ID
-    public Optional<Zanimivost> probiZanimivost(Long id) {
-        return znamenitostRepository.findById(id);
-=======
     // Pridobi po ID
     public Optional<Zanimivost> probiZanimivost(Long id) {
         return Optional.ofNullable(znamenitostRepository.pridobiZanimivostPoId(id));
->>>>>>> Stashed changes
     }
 }

@@ -7,21 +7,10 @@ import jakarta.persistence.*;
 public class Nastavitev {
     
     @Id
-<<<<<<< Updated upstream
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-    
-    @Column(name = "nastavitve_key", nullable = false, unique = true)
-    private String key;
-    
-    @Column(name = "nastavitve_atribut")
-=======
     @Column(name = "nastavitve_key", nullable = false, length = 50)
     private String key;
     
     @Column(name = "nastavitve_atribut", length = 100)
->>>>>>> Stashed changes
     private String value;
     
     // Constructors
@@ -34,17 +23,6 @@ public class Nastavitev {
     }
     
     // Getters and Setters
-<<<<<<< Updated upstream
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-=======
->>>>>>> Stashed changes
     public String getKey() {
         return key;
     }
