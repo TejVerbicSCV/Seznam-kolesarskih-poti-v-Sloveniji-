@@ -24,6 +24,6 @@ public class NastavitvService {
 
     // Pridobi nastavitev entiteto po ključu
     public Optional<Nastavitev> probiNastavitvEntiteto(String key) {
-        return Optional.ofNullable(nastavitvRepository.findById(key).orElse(null));
+        return Optional.ofNullable(nastavitvRepository.pridobiNastavitvEntitetoPoId(key));
     }
 }

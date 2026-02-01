@@ -12,6 +12,7 @@ target/
 *.ear
 *.log
 .mvn/wrapper/maven-wrapper.jar
+*-local.properties
 
 # IDEs
 .idea/

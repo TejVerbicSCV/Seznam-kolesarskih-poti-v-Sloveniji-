@@ -14,4 +14,7 @@ public interface NastavitvRepository extends JpaRepository<Nastavitev, String> {
 
     @Query(value = "SELECT * FROM pridobi_vse_nastavitve()", nativeQuery = true)
     java.util.List<Nastavitev> pridobiVseNastavitve();
+
+    @Query(value = "SELECT * FROM pridobi_nastavitev_po_kljucu_fn(CAST(:p_key AS TEXT))", nativeQuery = true)
+    Nastavitev pridobiNastavitvEntitetoPoId(@Param("p_key") String key);
 }
