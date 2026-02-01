@@ -1,0 +1,6 @@
+# Local Spring Boot configuration
+# Copy this to application-local.properties and add to your active profiles
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/your_db
+spring.datasource.username=your_username
+spring.datasource.password=your_password

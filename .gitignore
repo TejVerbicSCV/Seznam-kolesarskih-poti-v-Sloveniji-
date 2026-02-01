@@ -1,15 +1,37 @@
-# Skrivnosti
+# Secrets
 .env
 *.env
+.env.local
+.env.*.local
 
-# Java/Maven
+# Java / Maven
 target/
 *.class
+*.jar
+*.war
+*.ear
+*.log
+.mvn/wrapper/maven-wrapper.jar
+
+# IDEs
+.idea/
+*.iml
+.vscode/
 .settings/
 .project
 .classpath
+.factorypath
 
-# Ionic/Node
+# Node / Ionic
 node_modules/
 www/
 .sourcemaps/
+.npm/
+dist/
+platforms/
+plugins/
+hooks/
+
+# OS files
+.DS_Store
+Thumbs.db
