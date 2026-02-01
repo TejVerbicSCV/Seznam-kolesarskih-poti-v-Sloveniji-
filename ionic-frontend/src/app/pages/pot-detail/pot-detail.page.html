@@ -1,0 +1,147 @@
+<ion-header class="ion-no-border shadow-sm bg-white">
+  <div class="max-w-5xl mx-auto px-6 py-4">
+    <button routerLink="/home" class="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors">
+      <ion-icon name="arrow-back" class="text-xl"></ion-icon>
+      <span>Nazaj na poti</span>
+    </button>
+
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4" *ngIf="pot">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ pot.ime }}</h1>
+        <p class="text-lg text-gray-600" *ngIf="pot.kraji && pot.kraji.length > 0">{{ pot.kraji[0].ime }}</p>
+      </div>
+
+      <div class="flex gap-2" *ngIf="currentUser && currentUser.vloga === 'admin'">
+        <button (click)="editPot()"
+          class="px-4 py-2 bg-primary hover:bg-primary-shade text-white rounded-lg flex items-center gap-2 shadow-sm transition-colors">
+          <ion-icon name="pencil" class="text-lg"></ion-icon>
+          <span>Uredi pot</span>
+        </button>
+        <button (click)="deletePot()"
+          class="px-3 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg flex items-center shadow-sm transition-colors">
+          <ion-icon name="trash" class="text-lg"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-gray-50 font-app">
+  <div class="max-w-5xl mx-auto px-6 py-8" *ngIf="pot">
+
+    <!-- Key Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 flex flex-col items-start">
+        <div class="p-2 bg-primary-light rounded-lg mb-3">
+          <ion-icon name="resize" class="text-primary text-2xl"></ion-icon>
+        </div>
+        <p class="text-sm text-gray-600">Razdalja</p>
+        <p class="text-2xl font-bold text-gray-900">{{ pot.dolzinaKm }} km</p>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 flex flex-col items-start">
+        <div class="p-2 bg-purple-100 rounded-lg mb-3">
+          <ion-icon name="time" class="text-purple-600 text-2xl"></ion-icon>
+        </div>
+        <p class="text-sm text-gray-600">Trajanje</p>
+        <p class="text-2xl font-bold text-gray-900">{{ pot.priporocenCas }} ur</p>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 flex flex-col items-start">
+        <div class="p-2 bg-orange-100 rounded-lg mb-3">
+          <ion-icon name="stats-chart" class="text-orange-600 text-2xl"></ion-icon>
+        </div>
+        <p class="text-sm text-gray-600">Zahtevnost</p>
+        <p class="text-2xl font-bold text-gray-900">{{ pot.tezavnost }}</p>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-8">
+      <h2 class="text-xl font-semibold text-gray-900 mb-3">Opis</h2>
+      <p class="text-gray-700 leading-relaxed whitespace-pre-line">{{ pot.opis }}</p>
+    </div>
+
+    <!-- Difficulty Details -->
+    <div class="border rounded-xl p-6 mb-8" [ngClass]="getDifficultyClass(pot.tezavnost)">
+      <div class="flex items-center gap-3 mb-3">
+        <ion-icon name="fitness" class="text-2xl" [ngClass]="getDifficultyIconClass(pot.tezavnost)"></ion-icon>
+        <h2 class="text-xl font-semibold text-gray-900">Zahtevnost: {{ pot.tezavnost }}</h2>
+      </div>
+      <p class="leading-relaxed" [ngClass]="getDifficultyIconClass(pot.tezavnost)">
+        <span *ngIf="pot.tezavnost === 'LAHKO'">Primerno za začetnike in družine. Večinoma ravno teren.</span>
+        <span *ngIf="pot.tezavnost === 'SREDNJE'">Primerno za rekreativne kolesarje. Nekaj vzponov.</span>
+        <span *ngIf="pot.tezavnost === 'TEZKO'">Zahteva dobro pripravljenost. Strmi vzponi in tehnični odseki.</span>
+      </p>
+
+      <div class="mt-4">
+        <p class="text-sm text-gray-600 mb-2">Raven zahtevnosti:</p>
+        <div class="flex gap-1" *ngIf="pot">
+          <div class="w-8 h-2 rounded" [ngClass]="getDifficultyBarClass(0)"></div>
+          <div class="w-8 h-2 rounded" [ngClass]="getDifficultyBarClass(1)"></div>
+          <div class="w-8 h-2 rounded" [ngClass]="getDifficultyBarClass(2)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cities (Kraji) -->
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <ion-icon name="map" class="text-2xl text-gray-700"></ion-icon>
+        <h2 class="text-xl font-semibold text-gray-900">Kraji na poti</h2>
+        <span class="px-2 py-0.5 bg-green-100 text-green-800 text-sm rounded-full">{{ pot.kraji.length || 0 }}</span>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <div *ngFor="let kraj of pot.kraji"
+          class="px-3 py-1.5 bg-gray-100 rounded-lg text-gray-700 flex items-center gap-2">
+          <ion-icon name="pin" class="text-gray-500 text-sm"></ion-icon>
+          <span>{{ kraj.ime }} ({{ kraj.postnaStavilka }})</span>
+        </div>
+      </div>
+      <p *ngIf="!pot.kraji || pot.kraji.length === 0" class="text-gray-500 italic">Ni zabeleženih krajev.</p>
+    </div>
+
+    <!-- POIs -->
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <ion-icon name="location" class="text-2xl text-gray-700"></ion-icon>
+        <h2 class="text-xl font-semibold text-gray-900">Zanimivosti</h2>
+        <span class="px-2 py-0.5 bg-primary-light text-primary text-sm rounded-full">{{ pot.zanimivosti.length || 0
+          }}</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div *ngFor="let z of pot.zanimivosti; let i = index"
+          class="flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+          <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-medium">
+            {{ i + 1 }}
+          </div>
+          <span class="text-gray-800 text-base">{{ z.ime }}</span>
+        </div>
+      </div>
+      <p *ngIf="!pot.zanimivosti || pot.zanimivosti.length === 0" class="text-gray-500 italic">Ni zabeleženih
+        zanimivosti.</p>
+    </div>
+
+    <!-- Planning Tips -->
+    <div class="bg-primary-light border border-primary-tint rounded-xl p-6 mt-8">
+      <h2 class="text-lg font-semibold text-gray-900 mb-3">Načrtovanje vaše vožnje</h2>
+      <ul class="space-y-2">
+        <li class="flex items-start gap-2 text-gray-700">
+          <span class="text-primary mt-1">•</span>
+          Preverite vremenske razmere preden se odpravite na pot
+        </li>
+        <li class="flex items-start gap-2 text-gray-700">
+          <span class="text-blue-600 mt-1">•</span>
+          Prinesite dovolj vode in prigrizkov za {{ pot.priporocenCas }} h vožnje
+        </li>
+        <li class="flex items-start gap-2 text-gray-700">
+          <span class="text-blue-600 mt-1">•</span>
+          Vedno nosite čelado in upoštevajte prometne predpise
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</ion-content>
