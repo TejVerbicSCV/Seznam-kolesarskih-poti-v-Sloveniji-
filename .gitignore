@@ -13,4 +13,3 @@ target/
 node_modules/
 www/
 .sourcemaps/
-.angular/
